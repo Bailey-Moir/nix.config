@@ -1,0 +1,13 @@
+.desktopButton {
+  border: dashed 5px $bg;
+  font-size: 2rem;
+
+  label {
+    color: $bg;
+    font-weight: bold;
+    text-shadow: -1px 0px rgba($fg, 0.3),
+      1px 0px rgba($fg, 0.3),
+      0 1px rgba($fg, 0.3),
+      0 -1px rgba($fg, 0.3);
+  }
+}

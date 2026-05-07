@@ -1,0 +1,11 @@
+(deflisten volumePercentage :initial 0 '~/.config/scripts/volume.sh')
+
+(defwidget volume []
+  (button
+      :visible {volumePercentage != -1}
+      :halign 'end'
+      :class 'volume'
+      :onclick 'pavucontrol & disown'
+      (label
+        :text {volumePercentage == -1 ? ' ' : '${volumePercentage}% ${['', '', ''][round(volumePercentage/100*2, 0)]}'}
+        :limit-width 15)))

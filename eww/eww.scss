@@ -1,0 +1,60 @@
+@import "/etc/nixos/theme.scss";
+@import "./src/bar/bar.scss";
+@import "./src/themer/themer.scss";
+@import "./src/desktop/desktop.scss";
+@import "./src/home/home.scss";
+@import "./src/event/event.yuck";
+@import "./src/music/music.scss";
+
+* {
+  all: unset;
+  color: $fg;
+  font-family: "JetBrainsMonoNerdFont", "Source Han Sans JP", monospace;
+}
+
+window {
+  font-size: $fs;
+}
+
+menu {
+  background-color: $bg;
+  color: $fg;
+}
+
+window.csp {
+  border-radius: $br;
+  background-color: rgba($bg, 0.8);
+  font-size: 150px;
+  color: $fg;
+  border: none;
+
+  label {
+    min-width: 1em;
+    min-height: 1em;
+  }
+}
+
+.cspScale {
+  all: unset;
+  margin: -20px 20px 20px 20px;
+
+  trough {
+    min-height: 10px;
+    background: transparent;
+    border-radius: 0px;
+
+    slider {
+      min-height: 10px;
+      margin: -5px;
+      background: $fg;
+      border: none;
+      border-radius: 0px;
+      background-color: transparent;
+    }
+
+    highlight {
+      background-color: $fg;
+      border-radius: 0px;
+    }
+  }
+}

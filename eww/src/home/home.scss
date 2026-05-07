@@ -1,0 +1,8 @@
+box.home {
+  background-color: $bg;
+  border: 1px solid rgba($fg, 0.5);
+
+  >* {
+    margin: 5px;
+  }
+}

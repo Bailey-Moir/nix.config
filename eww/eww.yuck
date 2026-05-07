@@ -1,0 +1,19 @@
+(include 'src/csp.yuck')
+(include './src/varHolder.yuck')
+(include './src/bar/bar.yuck')
+(include './src/desktop/desktop.yuck')
+(include './src/themer/themer.yuck')
+(include './src/home/home.yuck')
+(include './src/event/event.yuck')
+(include './src/music/music.yuck')
+
+(defvar test 0)
+
+(defpoll time 
+  :interval '1s'
+  :initial '00:00'
+  `date +\"%a %d %b %I:%M\"`)
+
+(deflisten window '~/.config/scripts/monitor-wm.sh window')
+
+(deflisten theme :initial '{}' 'bash -c "echo /etc/nixos/hosts/$(hostname)/theme.json | entr -n jq -rc . /etc/nixos/hosts/$(hostname)/theme.json"')

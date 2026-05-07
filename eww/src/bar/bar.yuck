@@ -1,0 +1,85 @@
+(include './src/bar/modules/workspaces.yuck')
+(include './src/bar/modules/mode.yuck')
+(include './src/bar/modules/stray.yuck')
+(include './src/bar/modules/battery.yuck')
+(include './src/bar/modules/volume.yuck')
+
+(defwindow borderTop [out]
+  :geometry (geometry 
+              :x '0'
+              :y '-35'
+              :width '100%'
+              :height '100'
+              :anchor 'top center')
+  :stacking 'background'
+  :exclusive false
+  :wm-ignore false
+  :monitor out
+  (box))
+
+(defwindow borderBot [out]
+  :geometry (geometry 
+              :x '0'
+              :y '-35'
+              :width '100%'
+              :height '100'
+              :anchor 'bottom center')
+  :stacking 'background'
+  :exclusive false
+  :wm-ignore false
+  :monitor out 
+  (box))
+
+(defwindow bar [out]
+  :geometry (geometry 
+              :x '0'
+              :y '0'
+              :width '100%'
+              :height '30'
+              :anchor 'bottom center')
+  :stacking 'bottom'
+  :exclusive true
+  :wm-ignore false
+  :monitor out
+  (barstruct :out out))
+
+(defwidget barstruct [out]
+  (centerbox 
+    :orientation 'h'
+    (left :out out)
+    (middle)
+    (right)))
+
+(defwidget left [out]
+  (box
+    :orientation 'h'
+    :space-evenly false
+    :halign 'start'
+    :vexpand true
+    (workspaces :out out)
+    (mode)))
+
+(defwidget middle []
+  (box
+    :orientation 'h'
+    :space-evenly true
+    :halign 'center'
+    :vexpand true
+    (label
+      :text window)
+    ))
+
+(defwidget right []
+  (box
+    :orientation 'h'
+    :space-evenly false
+    :spacing 20
+    :halign 'end'
+    :vexpand true
+    :class 'right'
+    (varHolder)
+    (stray) 
+    (volume)
+    (battery)
+    (label
+      :text time)))

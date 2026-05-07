@@ -1,0 +1,36 @@
+(deflisten albumCover 
+  :initial ''
+  '~/.config/scripts/player-metadata.sh "mpris:artUrl"')
+(deflisten isPlaying 
+  :initial ''
+  '~/.config/scripts/player-metadata.sh "lc(status)"')
+
+(defwindow music [out]
+  :geometry (geometry 
+              :x '100'
+              :y '100'
+              :width '120'
+              :height '120'
+              :anchor 'top right')
+  :stacking 'bottom'
+  :focusable false
+  :exclusive false
+  :wm-ignore false
+  :monitor out
+  (revealer
+    :hexpand true
+    :vexpand true
+    :reveal {albumCover != ''}
+    (musicstruct)))
+
+(defwidget musicstruct []
+  (box
+    :class 'musicContainer'
+    :space-evenly false
+    :hexpand true
+    :vexpand true
+    (box 
+      :width 150
+      :height 150
+      :style 'background: url("${ albumCover }"), rgba(0,0,0,${isPlaying == "playing" ? 0 : 0.5}); background-size: contain;')))
+

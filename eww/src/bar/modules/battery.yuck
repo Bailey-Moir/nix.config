@@ -1,0 +1,17 @@
+(defwidget battery []
+  (box
+      :visible {EWW_BATTERY != ''}
+      :orientation 'h'
+      :halign 'end'
+      :class 'battery'
+      :space-evenly false
+      (label
+        :text {EWW_BATTERY != '' ? '${EWW_BATTERY.BAT0.capacity}%' : ''}
+        :limit-width 5)
+      (scale
+        :orientation 'h'
+        :active false 
+        :width 18
+        :min 0
+        :max 100
+        :value {EWW_BATTERY != '' ? EWW_BATTERY.BAT0.capacity : 0})))

@@ -1,0 +1,60 @@
+(defpoll nextEvent
+  :interval '1m'
+  :initial ''
+  'python ~/.config/scripts/next-event.py')
+
+(defwindow event [out]
+  :geometry (geometry 
+              :x '100'
+              :y '100'
+              :width '500'
+              :anchor 'top left')
+  :stacking 'bottom'
+  :focusable false
+  :exclusive false
+  :wm-ignore false
+  :monitor out
+  (revealer
+    :hexpand true
+    :vexpand true
+    :reveal {nextEvent != ''}
+    (eventstruct)))
+
+(defwidget eventstruct []
+  (box
+    :class 'eventContainer'
+    :space-evenly false
+    :hexpand true
+    :vexpand true
+    (box 
+      :orientation 'v'
+      :hexpand true
+      :vexpand true
+      :valign 'start'
+      :halign 'start'
+      :space-evenly false
+      :style 'margin: 20px;'
+      (label
+        :class 'event-name'
+        :valign 'start'
+        :halign 'start'
+        :xalign 0
+        :yalign 0
+        :wrap true
+        :markup {nextEvent == '' ? '' : nextEvent['name']})
+      (box 
+        :orientation 'h'
+        :hexpand true
+        :valign 'start'
+        :halign 'start'
+        :space-evenly false
+        (label
+          :halign 'start'
+          :valign 'start'
+          :style 'margin-right: 30px;'
+          :text {nextEvent == '' ? '' : ' ${captures(nextEvent['start'], '[^az]{2}:[^az]{2}..')[0][0]} - ${captures(nextEvent['end'], '[^az]{2}:[^az]{2}..')[0][0]}'})
+        (label
+          :halign 'start'
+          :valign 'start'
+          :visible {nextEvent != '' && nextEvent['location'] != ''}
+          :text {nextEvent == '' ? '' : ' ${nextEvent['location']}'})))))

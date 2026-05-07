@@ -1,0 +1,36 @@
+(deflisten brightnessLevel :initial 0 '~/.config/scripts/brightness.sh')
+(deflisten brightnessMax
+  :initial 1
+  'cat /sys/class/backlight/amdgpu_bl1/max_brightness')
+(defvar cspEnum 'volume')
+
+(defwindow csp [out]
+  :geometry (geometry
+             :x 0
+             :y 200
+             :width 200
+             :height 200
+             :anchor 'center')
+  
+  :stacking 'overlay'
+  :monitor out
+  (box
+    :orientation 'v'
+    :hexpand true
+    :vexpand true
+    :halign 'center'
+    :valign 'center'
+    :space-evenly false
+    (label
+      :halign 'center'
+      :valign 'center'
+      :style {cspEnum == 'volume' ? 'margin-right: 30px;' : 'margin-right: 50px;'}
+      :text {cspEnum == 'volume' ? ['󰝟','󰕿','󰖀','󰕾'][ceil(3 * volumePercentage/100)] : ['󰃞','󰃝','󰃟','󰃠'][brightnessLevel == brightnessMax ? 3 : floor(4 * brightnessLevel/brightnessMax)]})
+    (scale
+      :orientation 'h'
+      :active true
+      :hexpand true
+      :min 0
+      :max 100
+      :value {cspEnum == 'volume' ? volumePercentage : 100.0 * brightnessLevel/brightnessMax}
+      :class 'cspScale')))

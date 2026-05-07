@@ -1,0 +1,89 @@
+.borderTop {
+  border-radius: $br;
+  box-shadow: inset 0px 35px $bg;
+}
+
+.borderBot {
+  border-radius: $br;
+  box-shadow: inset 0px -35px $bg;
+}
+
+.bar {
+  margin: 0px 5px 0px 5px;
+  background-color: $bg;
+
+  button.workroomBtn {
+    font-size: 1.3em;
+    padding-bottom: 3px;
+    min-width: 1.8em;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.25);
+    }
+  }
+
+  button.workspaceBtn {
+    margin: 0px 5px 0px 5px;
+
+    &>box {
+      min-width: 1em;
+      min-height: 0.5em;
+      border-radius: 0.5em;
+      background-color: $fg;
+      transition: min-width 0.3s ease, background-color 0.3s ease;
+
+      &.active:not(.focused) {
+        min-width: 2em;
+        background-color: $sec;
+      }
+
+      &.focused {
+        min-width: 3em;
+        background-color: $pri;
+      }
+    }
+  }
+
+  button.sysTrayBtn {
+    padding-left: 30px;
+  }
+
+  .sysTray {
+    padding-left: 20px;
+
+    & .reset {
+      margin-bottom: 2px;
+    }
+  }
+
+  box.battery {
+    label {
+      margin-right: 5px;
+    }
+
+    scale {
+      trough {
+        min-height: 0.65em;
+        border: 0.8px solid $fg;
+
+        slider {
+          min-width: 2em;
+          background: transparent;
+        }
+
+        highlight {
+          background-color: $fg;
+          margin: 1px;
+          border-radius: 0px;
+        }
+      }
+    }
+  }
+
+  box.volume {
+    label {
+      min-width: 1em;
+      min-height: 1em;
+    }
+  }
+}

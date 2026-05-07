@@ -1,0 +1,26 @@
+(defwindow home [out]
+  :geometry (geometry 
+              :x '0'
+              :y '0'
+              :width '280px'
+              :height '125px'
+              :anchor 'center center')
+  :stacking 'overlay'
+  :exclusive false
+  :focusable true
+  :wm-ignore false
+  :monitor out
+  (homestruct))
+
+;;
+;; Colour oxocarbon
+;;
+
+(defwidget homestruct []
+  (box 
+    :orientation 'v'
+    :space-evenly false
+    :class 'themer'
+    :valign 'start'
+    (label
+      :text 'hi')))

@@ -1,0 +1,65 @@
+; (defwindow altbtn
+;   :geometry (geometry 
+;               :x '40'
+;               :y '40'
+;               :width '80'
+;               :height '80'
+;               :anchor 'top right')
+;   :stacking 'bottom'
+;   :focusable false
+;   :exclusive false
+;   :monitor '["eDP-1", "<primary>", 0]'
+;   :wm-ignore true
+;   (altstruct))
+; (defwidget altstruct []
+;   (button
+;     :onclick 'foot --working-directory ~/Documents/psg/alt -T "alt" -e nvim & disown'
+;     :class 'desktopButton'
+;     :hexpand true
+;     :vexpand true
+;     (label
+;       :text 'alt')))
+;
+; (defwindow dbbtn
+;   :geometry (geometry 
+;               :x '40'
+;               :y '160'
+;               :width '80'
+;               :height '80'
+;               :anchor 'top right')
+;   :stacking 'bottom'
+;   :focusable false
+;   :exclusive false
+;   :monitor '["eDP-1", "<primary>", 0]'
+;   :wm-ignore true
+;   (dbstruct))
+; (defwidget dbstruct []
+;   (button
+;     :onclick 'foot --working-directory ~/Documents/psg/alt -T "alt" -e docker-compose up db & disown'
+;     :class 'desktopButton'
+;     :hexpand true
+;     :vexpand true
+;     (label
+;       :text 'db')))
+;
+; (defwindow catbtn
+;   :geometry (geometry 
+;               :x '40'
+;               :y '280'
+;               :width '80'
+;               :height '80'
+;               :anchor 'top right')
+;   :stacking 'bottom'
+;   :focusable false
+;   :exclusive false
+;   :monitor '["eDP-1", "<primary>", 0]'
+;   :wm-ignore true
+;   (catstruct))
+; (defwidget catstruct []
+;   (button
+;     :onclick 'zathura ~/Documents/books/CategoryTheory.pdf & disown'
+;     :class 'desktopButton'
+;     :hexpand true
+;     :vexpand true
+;     (label
+;       :text 'cat')))

@@ -1,0 +1,4 @@
+(defwidget varHolder []
+  (label
+    :text "${theme}${backgroundChunks}${workspaces}${brightnessLevel}${cspEnum}"
+    :visible false))

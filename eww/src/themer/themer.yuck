@@ -1,0 +1,192 @@
+(defwindow themer [out]
+  :geometry (geometry 
+              :x '0'
+              :y '0'
+              :width '280px'
+              :height '125px'
+              :anchor 'center center')
+  :stacking 'overlay'
+  :exclusive false
+  :focusable true
+  :wm-ignore false
+  :monitor out
+  (themerstruct))
+
+(defwidget themerstruct []
+  (box 
+    :orientation 'v'
+    :space-evenly false
+    :class 'themer'
+    :valign 'start'
+    (schemer)
+    (darkLightMode)
+    (shadowToggle)
+    (innerGap)
+    (borderRadius)
+    (opacity)
+    (barToggle)
+    (bgButtons)
+    (buildButton)))
+
+(defwidget schemer []
+  (box
+    :orientation 'h'
+    :valign 'start'
+    :halign 'start'
+    :space-evenly true
+    :class 'theme-row'
+    :halign 'start'
+    (label
+      :valign 'start'
+      :class 'combo-label'
+      :text 'Colour scheme: ')
+    (box
+      :class 'theme-combo'
+      (overlay
+        (combo-box-text
+          :items '[catppuccin,oxocarbon,gruvbox]'
+          :onchange 'bash -c "jq \'.name = \\"{}\\"\' /etc/nixos/hosts/$(hostname)/theme.json | sponge /etc/nixos/hosts/$(hostname)/theme.json"')
+        (label
+          :text {theme['name']})))))
+
+(defwidget darkLightMode []
+  (box
+    :orientation 'h'
+    :valign 'start'
+    :halign 'start'
+    :space-evenly true
+    :class 'theme-row'
+    :halign 'start'
+    (label
+      :halign 'start'
+      :class 'row-label'
+      :text 'Dark Mode:')
+    (checkbox
+      :vexpand false
+      :valign 'center'
+      :checked {theme['dark']}
+      :onchecked 'bash -c \'jq ".dark = true" /etc/nixos/hosts/$(hostname)/theme.json | sponge /etc/nixos/hosts/$(hostname)/theme.json\''
+      :onunchecked 'bash -c \'jq ".dark = false" /etc/nixos/hosts/$(hostname)/theme.json | sponge /etc/nixos/hosts/$(hostname)/theme.json\'')))
+
+(defwidget shadowToggle []
+  (box
+    :orientation 'h'
+    :valign 'start'
+    :halign 'start'
+    :space-evenly true
+    :class 'theme-row'
+    :halign 'start'
+    (label
+      :halign 'start'
+      :class 'row-label'
+      :text 'Shadows:')
+    (checkbox
+      :vexpand false
+      :valign 'center'
+      :checked {theme['shadow']}
+      :onchecked 'bash -c \'jq ".shadow = true" /etc/nixos/hosts/$(hostname)/theme.json | sponge /etc/nixos/hosts/$(hostname)/theme.json\''
+      :onunchecked 'bash -c \'jq ".shadow = false" /etc/nixos/hosts/$(hostname)/theme.json | sponge /etc/nixos/hosts/$(hostname)/theme.json\'')))
+
+(defwidget barToggle []
+  (box
+    :orientation 'h'
+    :valign 'start'
+    :halign 'start'
+    :space-evenly true
+    :halign 'start'
+    :class 'theme-button'
+    (button
+      :vexpand false
+      :valign 'center'
+      :onclick 'bash -c "~/.config/scripts/eww-open.sh bar && ~/.config/scripts/eww-open.sh borderBot && ~/.config/scripts/eww-open.sh borderTop"'
+      (label 
+        :text 'Bar Toggle'))))
+
+(defwidget innerGap []
+  (box
+    :orientation 'h'
+    :valign 'start'
+    :halign 'start'
+    :space-evenly true
+    :class 'theme-row'
+    :halign 'start'
+    (label
+      :halign 'start'
+      :class 'row-label'
+      :text 'Inner Gap:')
+    (input
+      :value {theme['gap']}
+      :onaccept 'bash -c "jq \'.gap = \\"{}\\"\' /etc/nixos/hosts/$(hostname)/theme.json | sponge /etc/nixos/hosts/$(hostname)/theme.json"')))
+
+
+(defwidget borderRadius []
+  (box
+    :orientation 'h'
+    :valign 'start'
+    :halign 'start'
+    :space-evenly true
+    :class 'theme-row'
+    :halign 'start'
+    (label
+      :halign 'start'
+      :class 'row-label'
+      :text 'Border Radius:')
+    (input
+      :value {theme['borderRadius']}
+      :onaccept 'bash -c "jq \'.borderRadius = \\"{}\\"\' /etc/nixos/hosts/$(hostname)/theme.json | sponge /etc/nixos/hosts/$(hostname)/theme.json"')))
+
+(defwidget opacity []
+  (box
+    :orientation 'h'
+    :valign 'start'
+    :halign 'start'
+    :space-evenly true
+    :class 'theme-row'
+    :halign 'start'
+    (label
+      :halign 'start'
+      :class 'row-label'
+      :text 'Foot Opacity:')
+    (input
+      :value {theme['opacity']}
+      :onaccept 'bash -c "jq \'.opacity = \\"{}\\"\' /etc/nixos/hosts/$(hostname)/theme.json | sponge /etc/nixos/hosts/$(hostname)/theme.json"')))
+
+;
+; Backgrounds
+;
+(deflisten backgroundChunks :initial '[]' '~/.config/scripts/background-chunks.sh')
+(defwidget bgButtons []
+  (box 
+    :class 'widget'
+    :orientation 'v'
+    :space-evenly false
+    (for backgrounds in {backgroundChunks}
+      (box 
+        :class 'widget'
+        :orientation 'h'
+        :space-evenly false
+        (for background in {backgrounds}
+            (bgButton :bg background))))))
+(defwidget bgButton [bg]
+  (button 
+    :onclick 'bash -c "jq -r \'.[.name].bg = \\"${bg}\\"\' /etc/nixos/hosts/$(hostname)/theme.json | sponge /etc/nixos/hosts/$(hostname)/theme.json"'
+    (image
+        :path '../bgs/${theme["name"]}/_${bg}/thumbnail${captures(bg, "\.[a-z]+$")[0][0]}'
+        :tooltip {bg}
+        :image-width 200
+        :image-height 150)))
+
+(defwidget buildButton []
+  (box
+    :orientation 'h'
+    :valign 'start'
+    :halign 'start'
+    :halign 'start'
+    :space-evenly true
+    :class 'theme-button'
+    (button
+      :vexpand false
+      :valign 'center'
+      :onclick '/etc/nixos/build.sh'
+      (label 
+        :text 'Build'))))

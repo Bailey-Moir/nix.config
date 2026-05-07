@@ -1,0 +1,6 @@
+(deflisten modeTxt '~/.config/scripts/monitor-wm.sh mode')
+
+(defwidget mode []
+    (label
+      :text modeTxt
+      :halign 'start'))

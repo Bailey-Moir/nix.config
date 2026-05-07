@@ -1,0 +1,35 @@
+box.themer {
+  background-color: $bg;
+  border-radius: $br;
+  border: 1px solid rgba($fg, 0.5);
+  padding: 10px 15px 10px 15px;
+
+  >* {
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
+
+  label.combo-label {
+    margin-top: 6px;
+  }
+
+  box.theme-combo {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 5px;
+    border-radius: 5px;
+  }
+
+  box.theme-button>* {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 5px;
+    border-radius: 5px;
+  }
+
+  window.popup {
+    background-color: $bg;
+  }
+
+  checkbox {
+    background-color: pink;
+  }
+}

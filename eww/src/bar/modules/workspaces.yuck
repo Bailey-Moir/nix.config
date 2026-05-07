@@ -1,0 +1,24 @@
+(deflisten workspaces :initial '{"eDP-1": ["1"]}' '~/.config/scripts/monitor-wm.sh workspaces')
+(deflisten workspace :initial '{"eDP-1": "1a一"}' '~/.config/scripts/monitor-wm.sh workspace')
+
+(defwidget workspaces [out]
+  (box 
+    :class 'widget'
+    :orientation 'h'
+    :space-evenly false
+    (button
+      :class 'workroomBtn'
+      :onclick '~/.config/scripts/cycle-workroom.sh'
+      (label
+        :text {substring(jq(workspace, '."${out}"'),3,1)}))
+    (for i in {'[1,2,3,4,5]'}
+          (workspacebox :i i :out out))))
+        
+(defwidget workspacebox [i out]
+  (button 
+    :class 'workspaceBtn'
+    :onclick '~/.config/scripts/wm-msg.sh workspace ${i}${substring(jq(workspace, '."${out}"'),2,1)}'
+    (box
+      :halign 'center'
+      :valign 'center'
+      :class 'dot ${ substring(jq(workspace, '."${out}"'),1,1) == i ? 'focused' : '' } ${ matches(jq(workspaces, '."${out}"'), '\"${i}\"') ? 'active' : 'inactive' }')))

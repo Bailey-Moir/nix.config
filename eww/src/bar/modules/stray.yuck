@@ -1,0 +1,30 @@
+(defvar trayOpen
+    false)
+
+(defwidget stray []
+  (box 
+    :orientation 'h'
+    :space-evenly false
+    (button
+      :class 'sysTrayBtn'
+      :onclick '${EWW_CMD} update trayOpen=${!trayOpen}'
+      (label
+        :text {trayOpen ? '' : ''}))
+    (revealer
+      :hexpand true
+      :vexpand true
+      :reveal trayOpen
+      :class 'sysTray'
+      :transition 'none'
+      (box 
+        :orientation 'h'
+        :space-evenly false
+        (button
+          :onclick 'pkill eww'
+          :style 'margin-right: 20px;'
+          (label
+            :class 'reset'
+            :text {'󰜉'}))
+        (systray 
+          :icon-size 18
+          :spacing 2)))))

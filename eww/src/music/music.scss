@@ -1,0 +1,10 @@
+.musicContainer {
+  background-color: $bg;
+  border-radius: $br;
+
+  &>box {
+    border-radius: max($br - 10px, 0);
+    background-blend-mode: multiply;
+    margin: 10px;
+  }
+}

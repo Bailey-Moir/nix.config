@@ -1,0 +1,38 @@
+@import "/home/charps/.config/theme.css";
+
+* {
+    color: @fg;
+    text-shadow: none;
+}
+
+window {
+    background-color: transparent
+}
+
+/* Outer bar container, takes all the window width/height */
+#outer-box {
+    margin: 0px
+}
+
+/* Inner bar container, surrounds buttons */
+#inner-box {
+    background-color: @bg;
+    opacity: 0.9;
+    padding: 5px;
+}
+
+button, image {
+    background: none;
+    border: none;
+    box-shadow: none
+}
+
+button {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 5px
+}
+
+button:focus, button:hover {
+    background-color: rgba (255, 255, 255, 0.1)
+}
