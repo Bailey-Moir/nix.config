@@ -3,4 +3,5 @@
 (defwidget mode []
     (label
       :text modeTxt
+      :style 'margin-left: 5px;'
       :halign 'start'))

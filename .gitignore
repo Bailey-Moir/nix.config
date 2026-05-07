@@ -1,0 +1,10 @@
+*
+!.gitignore
+!eww/
+!eww/**
+!scripts/
+!scripts/**
+!nwg-bar/
+!nwg-bar/**
+!bgs/
+!bgs/**
