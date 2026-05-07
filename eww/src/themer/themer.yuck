@@ -5,7 +5,7 @@
               :width '280px'
               :height '125px'
               :anchor 'center center')
-  :stacking 'overlay'
+  :stacking 'overlay' 
   :exclusive false
   :focusable true
   :wm-ignore false
@@ -187,6 +187,6 @@
     (button
       :vexpand false
       :valign 'center'
-      :onclick '/etc/nixos/build.sh'
+      :onclick '~/.config/scripts/build.sh'
       (label 
         :text 'Build'))))
